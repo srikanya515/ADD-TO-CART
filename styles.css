@@ -1,0 +1,200 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Crucial: Remove default body margin for layout control */
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6; /* Improves text readability */
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky; /* Makes the header stick to the top when scrolling */
+    top: 0; /* Sticks to the very top */
+    z-index: 1000; /* Ensures header stays on top of other content */
+}
+
+/* Cart Icon and Superscript Styles (for the small number next to the cart icon) */
+.cart-icon-container {
+    font-size: 2em; /* Adjusts the size of the cart emoji/icon */
+    position: relative; /* Essential for positioning the superscript count */
+    padding-right: 15px; /* Creates space for the superscript number */
+    cursor: pointer; /* Indicates it's clickable */
+}
+
+.cart-count-superscript {
+    position: absolute; /* Positions the number relative to .cart-icon-container */
+    top: 0;
+    right: 0;
+    background-color: #ff4d4d; /* Red background for the count bubble */
+    color: white; /* White text color */
+    font-size: 0.5em; /* Smaller font size relative to the cart icon */
+    border-radius: 50%; /* Makes it a perfect circle */
+    padding: 2px 6px; /* Padding inside the circle */
+    min-width: 1em; /* Ensures it's a circle even for single digits */
+    text-align: center; /* Centers the number horizontally */
+    line-height: 1; /* Vertically centers the number */
+    transform: translate(50%, -50%); /* Fine-tunes positioning as a superscript */
+    display: none; /* Hidden by default (when cart is empty) */
+}
+
+.cart-count-superscript.active {
+    display: inline-block; /* Becomes visible when JavaScript adds this class */
+}
+
+/* Main Layout: Products Grid (Left) and Cart Sidebar (Right) */
+.container {
+    display: flex; /* Enables Flexbox for side-by-side layout */
+    margin: 20px; /* Overall margin around the entire content area */
+    gap: 20px; /* Space between the main content and the cart sidebar */
+    align-items: flex-start; /* Aligns content blocks to the top of the container */
+}
+
+.main-content {
+    flex-grow: 1; /* Allows the main product content to expand and fill available space */
+    max-width: 65%; /* Limits the main content width, reserving space for the cart */
+}
+
+.cart-sidebar {
+    width: 35%; /* **This sets the width of your cart column on the right side** */
+    min-width: 300px; /* Ensures the cart doesn't become too narrow on smaller screens */
+    position: sticky; /* **Makes the cart stick as you scroll down the page** */
+    top: 80px; /* **Distance from the top of the viewport when it sticks** (adjust if header height changes) */
+    align-self: flex-start; /* Ensures it aligns to the very top within its flex container */
+}
+
+/* Product Card Styling */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid columns */
+    gap: 20px; /* Space between product cards */
+    margin-bottom: 40px; /* Space below the product grid */
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lifts card on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* More prominent shadow on hover */
+}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Ensures images cover their area without distortion */
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer; /* Indicates image is clickable */
+    transition: opacity 0.2s; /* Smooth hover effect */
+}
+
+.product-image:hover {
+    opacity: 0.8;
+}
+
+.product-card h3 {
+    margin: 10px 0 5px;
+    color: #0056b3;
+}
+
+.product-card p {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Related Items Section Styling */
+.related-items-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    /* This section is initially hidden by JS and shown when needed */
+}
+
+.related-items-section h2 {
+    color: #0056b3;
+    margin-bottom: 20px;
+}
+
+/* Cart Summary Display Styling */
+.cart-summary {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.cart-summary h2 {
+    margin-top: 0;
+    color: #0056b3;
+}
+
+#cart-items-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+#cart-items-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #eee;
+    display: flex;
+    justify-content: space-between; /* Aligns item name/quantity to left, price to right */
+}
+
+#cart-items-list li:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.total-price-container {
+    border-top: 2px solid #eee;
+    padding-top: 10px;
+    text-align: right;
+    font-size: 1.2em;
+    color: #000;
+}
+
+.empty-cart-message {
+    font-style: italic;
+    color: #777;
+    text-align: center;
+}
+
+/* Responsive Adjustments for Smaller Screens (Phones/Tablets) */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column; /* Stacks products and cart vertically */
+        align-items: center; /* Centers stacked content */
+        margin: 10px; /* Reduce overall margin on small screens */
+        gap: 15px; /* Slightly smaller gap between stacked sections */
+    }
+
+    .main-content,
+    .cart-sidebar {
+        width: 100%; /* Both take full width when stacked */
+        max-width: none; /* Remove any max-width constraints */
+        position: static; /* Remove sticky positioning for sidebar when stacked */
+    }
+
+    .cart-sidebar {
+        margin-top: 15px; /* Add space between products and cart when stacked */
+    }
+
+    header {
+        padding: 10px 15px; /* Smaller padding for header on small screens */
+    }
+}
